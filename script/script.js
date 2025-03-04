@@ -16,36 +16,55 @@ const adicionarTarefa = (titulo) => {
        titulo,
        concluida: false
     };
-    tarefas = [tarefas, novaTarefa];
-    atualizarLista();
+    tarefas = [...tarefas, novaTarefa];
+    atualizarLista(tarefas);
     alert("Tarefa adicionada com sucesso!");
 };
 
 const concluirTarefa = (id) =>{
+    // localiza a tarefa e altera o False predefinido para todas as tarefas para True
     tarefas = tarefas.map(tarefa => 
         tarefa.id === id ? { ...tarefa, concluida: true } : tarefa
     );
-atualizarLista();
+atualizarLista(tarefas);
 };
 
 const filtrarPendentes = () => {
+    //filtra as tarefas que nao foram alteradas para True ou seja tarefas que ainda nao foram concluidas
     const tarefasPendentes = tarefas.filter(tarefa => !tarefa.concluida);
     atualizarLista(tarefasPendentes);
 }
 
+const filtrarConcluidas = () => {
+    //filtra as tarefas concluidas para modifica-las na lista e ficar com mais facil vizualização
+    const tarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida);
+    atualizarLista(tarefasConcluidas);
+};
 
 
-const atualizarLista = () => {
-    // atualiza e cria a lista pegando os elementos do html e criando a partir do javaScript sem necessidade de mexer no codigo html
 
+const atualizarLista = (listaTarefas = tarefas) => {
+    // atualiza a lista e alterando remotamente o HTML para criar os itens da lista
     const lista = document.getElementById("lista-tarefas");
     lista.innerHTML = "";
-    tarefas.forEach(tarefa => {
+    
+    listaTarefas.forEach(tarefa => {
         const li = document.createElement("li");
         li.textContent = tarefa.titulo;
-        lista.appendChild(li);
-    });
 
+    //aqui adiciona o botao de concluir ao lado de cada tarefa adicionada, assim o usuario pode clicar em concluir assim uma linha vai passar pela tarefa concluida assim melhorando a vizualização das tarefas ainda pendentes
+
+        if (!tarefa.concluida) {
+            const botaoConcluir = document.createElement("button");
+            botaoConcluir.textContent = "Concluir";
+            botaoConcluir.addEventListener("click", () => concluirTarefa(tarefa.id));
+            li.appendChild(botaoConcluir);
+        } else {
+            li.style.textDecoration = "line-through";
+        }
+        
+        lista.appendChild(li);
+    }); 
 };
 
 document.getElementById("btnAdicionar").addEventListener("click", () => {
@@ -58,6 +77,12 @@ document.getElementById("btnAdicionar").addEventListener("click", () => {
     }
 
 });
-document.addEventListener("DOMContentLoaded", atualizarLista);
+
+document.getElementById("filtrar-pendentes").addEventListener("click", filtrarPendentes);
+document.getElementById("mostrar-todas").addEventListener("click", () => atualizarLista());
+document.getElementById("filtrar-concluidas").addEventListener("click", filtrarConcluidas);
+
+
+document.addEventListener("DOMContentLoaded", () => atualizarLista(tarefas));
 
 
