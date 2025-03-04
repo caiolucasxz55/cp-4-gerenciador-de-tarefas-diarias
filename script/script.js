@@ -9,10 +9,10 @@ const tarefa = {
 };
 
 const adicionarTarefa = (titulo) => {
-    // adiciona a tarefa ( fiz o uso do datenow acho q pra ficar mais legal com o id sendo o tempo atual que a tarefa foi adicionada) e usa o spread para juntar e gera o alerta, alem de chamar a função atualizarLista para inseri-la na lista
+    // adiciona a tarefa aumentando o id gradativamente com base nas tarefas adicionadas e usa o spread para juntar e gera o alerta, alem de chamar a função atualizarLista para inseri-la na lista
 
     const novaTarefa = {
-       id: Date.now(),
+       id: tarefas.length + 1,
        titulo,
        concluida: false
     };
@@ -20,6 +20,20 @@ const adicionarTarefa = (titulo) => {
     atualizarLista();
     alert("Tarefa adicionada com sucesso!");
 };
+
+const concluirTarefa = (id) =>{
+    tarefas = tarefas.map(tarefa => 
+        tarefa.id === id ? { ...tarefa, concluida: true } : tarefa
+    );
+atualizarLista();
+};
+
+const filtrarPendentes = () => {
+    const tarefasPendentes = tarefas.filter(tarefa => !tarefa.concluida);
+    atualizarLista(tarefasPendentes);
+}
+
+
 
 const atualizarLista = () => {
     // atualiza e cria a lista pegando os elementos do html e criando a partir do javaScript sem necessidade de mexer no codigo html
