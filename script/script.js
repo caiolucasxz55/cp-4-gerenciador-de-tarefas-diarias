@@ -18,7 +18,12 @@ const adicionarTarefa = (titulo) => {
     };
     tarefas = [...tarefas, novaTarefa];
     atualizarLista(tarefas);
-    alert("Tarefa adicionada com sucesso!");
+    // reduce adicionado para o calculo de tarefas concluidas que serao exibidas no alert
+    const totalConcluidas = tarefas.reduce((total, tarefa) => {
+        return tarefa.concluida ? total + 1 : total;
+    }, 0);
+    
+    alert(`Tarefa adicionada com sucesso! Total de tarefas concluídas: ${totalConcluidas}`);
 };
 
 const concluirTarefa = (id) =>{
@@ -26,6 +31,14 @@ const concluirTarefa = (id) =>{
     tarefas = tarefas.map(tarefa => 
         tarefa.id === id ? { ...tarefa, concluida: true } : tarefa
     );
+
+    //uso do find para pegar titulo e id da tarefa e analisa-la e passar para True
+    const tarefaConcluida = tarefas.find(tarefa => tarefa.id === id);
+    
+    if (tarefaConcluida) {
+        const { titulo, concluida } = tarefaConcluida;
+        alert(`Tarefa concluída - Título: ${titulo}, Status: ${concluida}`);
+    }
 atualizarLista(tarefas);
 };
 
