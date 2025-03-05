@@ -12,21 +12,22 @@
         <header>
             <h1>Organizador de Tarefas Diarias</h1>
         </header>
-        <fieldset>
-            <div>
-                <input type="text" id="idTarefa" placeholder="Digite uma nova tarefa...">
-            </div>
-            <div>
-                <button type="button" id="btnAdicionar">Adicionar</button>
-            </div>
-        </fieldset>
-        <section class="btns-organizacao">
+        <form>
+            <fieldset>
+                <div>
+                    <input type="text" id="idTarefa" placeholder="Digite uma nova tarefa...">
+                </div>
+                <div>
+                    <button type="button" id="btnAdicionar">Adicionar</button>
+                </div>
+            </fieldset>
+        </form>
+        <div class="btns-organizacao">
             <button id="filtrar-pendentes">Filtrar Pendentes</button>
             <button id="mostrar-todas">Mostrar Todas</button>
             <button id="filtrar-concluidas">Filtrar concluidas</button>
             
-        </section>
-    </form>
+        </div>
     <div class="container-list">
         <ul id="lista-tarefas"></ul>
 
