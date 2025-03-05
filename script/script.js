@@ -122,3 +122,4 @@ document.getElementById("filtrar-concluidas").addEventListener("click", filtrarC
 document.addEventListener("DOMContentLoaded", () => atualizarLista(tarefas));
 
 
+//------------------------------------------Caio Lucas Rules-------------------------------------------------
