@@ -84,7 +84,7 @@ const atualizarLista = (listaTarefas = tarefas) => {
             botaoConcluir.textContent = "Concluir";
             botaoConcluir.addEventListener("click", () => concluirTarefa(tarefa.id));
             li.appendChild(botaoConcluir);
-        } else {
+        } else { 
             li.style.textDecoration = "line-through";
         }
         
