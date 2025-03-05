@@ -1,5 +1,6 @@
 // 1- criando o Array vazio para a atualização de tarefas com 'id, titulo e concluida' e fazendo uso do Spread
 
+//Array
 let tarefas = []
 
 //------------------------------------------CRIAÇÃO DAS TAREFAS--------------------------------------------------------------------------
